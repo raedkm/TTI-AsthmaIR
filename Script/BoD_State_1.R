@@ -21,21 +21,25 @@ library(stringr)
 
 
 ## Loading the 2010 children census 
-path <- "Data\\Census\\nhgis0034_ds172_2010_block.csv"
+path_census <- "Data\\Census\\nhgis0034_ds172_2010_block.csv"
 
 var_census <- c("GISJOIN", "STATE", "STATEA", "URBRURALA", "H7V001", 
          "H76003", "H76004", "H76005", "H76006", 
-         "H76027", "H76028", "H76029", "H76030")
+         "H76027", "H76028", "H76029", "H76030", 
+         "PLACEA")
 
 
 # Making new variable of total children count "CHILDREN" and renaming variables
-census <- fread(file = path,data.table = F, stringsAsFactors = F, verbose = T, select = var_census,
+census <- fread(file = path_census,data.table = F, stringsAsFactors = F, verbose = T, select = var_census,
                 colClasses = list(factor = c("STATE", "URBRURALA"))) %>% 
   filter(H7V001 > 0) %>% 
   mutate(CHILDREN = H76003 + H76004 + H76005 +H76006 +
            H76027 + H76028 + H76029 + H76030) %>% 
-  select(GISJOIN, STATEA, STATE, URBRURALA, CHILDREN) %>% 
-  rename(FIPS = STATEA, URBAN = URBRURALA) %>% 
+  mutate(FIPS = stri_sub(GISJOIN, 2,3)) %>%
+  mutate(PLACEA = str_pad(PLACEA, 5, pad = "0")) %>%
+  mutate(PlaceFIPS = paste0(FIPS, PLACEA)) %>% 
+  select(GISJOIN, FIPS, PlaceFIPS, PLACEA, STATE, URBRURALA, CHILDREN) %>% 
+  rename(URBAN = URBRURALA) %>% 
   as_tibble()
 
 included_blocks <- census$GISJOIN
@@ -45,7 +49,7 @@ included_blocks <- census$GISJOIN
 ## Loading NO2 concentration  
 var_lur <- c("GISJOIN", "Y2010")
 
-lur <- fread("Data\\Pollutant\\NO2_2010.csv", data.table = F, stringsAsFactors = F, select = var_lur) %>% 
+lur <- fread("Data\\Pollutant\\NO2_2010.csv", data.table = F, stringsAsFactors = F,  verbose = T, select = var_lur) %>% 
   filter(GISJOIN %in% included_blocks) %>% 
   mutate(NO2 = Y2010*1.88) %>% 
   select(GISJOIN, NO2) %>% 
@@ -58,6 +62,7 @@ path_inc <- "Results\\Asthma_IR.xlsx"
 
 inc <- read_excel(path_inc, sheet = "Aggregate") %>% 
   mutate(IR = as.double(`IR per 1000`/1000)) %>% 
+  mutate(FIPS = str_pad(FIPS, 2, pad = "0")) %>% 
   select(FIPS, IR)
 
 
@@ -73,6 +78,7 @@ path_prv <- "Results\\Asthma_PRV.xlsx"
 
 prv <- read_excel(path_prv, sheet = "Aggregate") %>% 
   mutate(PRV = as.double(`PRV per 100`/100)) %>% 
+  mutate(FIPS = str_pad(FIPS, 2, pad = "0")) %>% 
   select(FIPS, PRV)
 
 
