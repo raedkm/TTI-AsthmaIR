@@ -7,13 +7,6 @@
 #---------------------------------------------#
 
 
-
-# Interactive table
-table_1 <- datatable(cities_table, filter = 'top', options = list(
-  pageLength = 50, autoWidth = TRUE))
-
-
-
 # Table Container
 sketch = htmltools::withTags(table(
   class = 'display',
@@ -37,13 +30,13 @@ print(sketch)
 
 
 # Table with container
-datatable(cities_table, filter = 'top', options = list(
-  pageLength = 50, autoWidth = TRUE))
-
-datatable(cities_table, filter = 'top', 
+table_IR <- datatable(cities_table, filter = 'top', 
           options = list(pageLength = 50, autoWidth = TRUE), 
           class = 'cell-border stripe',
           editable = F,
           colnames = c('Total Population 2000' = 4),
           container = sketch,
           rownames = FALSE) 
+
+
+saveWidget(table_IR, file = "cities_state_IR.html")
