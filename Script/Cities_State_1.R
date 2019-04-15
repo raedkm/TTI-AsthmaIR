@@ -6,9 +6,6 @@
 #Date Created: March-27-2019
 #---------------------------------------------#
 
-#Loading libraries
-library(stringi)
-library(DT)
 
 # Loading the 500-Cities 
 path_cities <- "Data\\Cities.csv"
