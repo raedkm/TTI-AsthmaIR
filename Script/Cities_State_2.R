@@ -40,10 +40,15 @@ print(sketch)
 datatable(cities_table, filter = 'top', options = list(
   pageLength = 50, autoWidth = TRUE))
 
-datatable(cities_table, filter = 'top', 
+cities_state_IT <- datatable(cities_table, filter = 'top', 
           options = list(pageLength = 50, autoWidth = TRUE), 
           class = 'cell-border stripe',
           editable = F,
           colnames = c('Total Population 2000' = 4),
           container = sketch,
           rownames = FALSE) 
+
+
+# Saving file
+
+htmltools::save_html(cities_state_IT, file = "500_cities_stateIR.html")
