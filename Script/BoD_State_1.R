@@ -1,7 +1,8 @@
 #---------------------------------------------#
 #Project : State specific Burden of childhood asthma due to TRAP - 2019
-#Part : (01) Preparing data sets 
-#Purpose: Read in census data, income data, NO2 conc, incidence rate (state-specifi), and prevelance rate (state, specific)
+#Sub     : Burden estimates
+#Part    : (01) Preparing data sets 
+#Purpose : Read in census data, income data, NO2 conc, incidence rate (state-specifi), and prevelance rate (state, specific)
 #         Followed by joining the data sets and replacing missing IR/PRV with weighted averages
 #Created by Raed Alotaibi
 #Date Created: March-12-2019
@@ -137,6 +138,28 @@ join <- census %>%
             left_join(prv, by = "FIPS") %>% 
             replace_na(list(IR = weighted_IR, PRV = weighted_PRV)) %>% 
             select(-GISJOIN_i)
+
+
+
+# Total Incidenct Cases ---------------------------------------------------
+
+incident <- join %>%
+  mutate(CASES = (CHILDREN - (CHILDREN * PRV)) * IR)
+
+
+
+# Burden Modeling ---------------------------------------------------------
+
+## Estimating (RR of new exposure: RRnew, Attributable fraction; AF, Attributable cases; AC with lower and upper limits)
+
+crf <- 1.05
+unit_inc <- 4
+
+burden <- incident %>% 
+  mutate(RRnew = exp((log(crf)/unit_inc)*NO2)) %>% 
+  mutate(AF = (RRnew - 1)/(RRnew)) %>% 
+  mutate(AC = AF*CASES) 
+
 
   
   

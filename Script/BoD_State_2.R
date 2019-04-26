@@ -8,28 +8,6 @@
 
 
 
-# Total Incidenct Cases ---------------------------------------------------
-
-incident <- join %>%
-  mutate(CASES = (CHILDREN - (CHILDREN * PRV)) * IR)
-
-        
-
-
-
-# Burden Modeling ---------------------------------------------------------
-
-## Estimating (RR of new exposure: RRnew, Attributable fraction; AF, Attributable cases; AC with lower and upper limits)
-
-crf <- 1.05
-unit_inc <- 4
-
-burden <- incident %>% 
-  mutate(RRnew = exp((log(crf)/unit_inc)*NO2)) %>% 
-  mutate(AF = (RRnew - 1)/(RRnew)) %>% 
-  mutate(AC = AF*CASES) 
-  
-
 
 
 # Result ----------------------------------------------------------------
