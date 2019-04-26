@@ -8,7 +8,7 @@
 #Date Created: April-26-2019
 #---------------------------------------------#
 
-
+#Note: Run "BoD_State_1.R" first to obtain dataset.
 
 library(ggplot2)
 
