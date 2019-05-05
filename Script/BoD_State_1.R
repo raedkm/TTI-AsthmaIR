@@ -123,7 +123,7 @@ prv <- read_excel(path_prv, sheet = "Aggregate") %>%
 # Estimating weighted PRV
 read_excel(path_prv, sheet = "Aggregate") %>%   
   summarise(PRV = sum(EVER)/sum(SAMPLE))
-weighted_PRV <- 0.151
+weighted_PRV <- 0.150
 
 
 

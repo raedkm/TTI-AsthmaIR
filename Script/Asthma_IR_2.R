@@ -42,12 +42,12 @@ range(Asthma_agg_IR$`IR per 1000`)
 
 
 
-# # Aggregating the National IR for all years 
-# Asthma_agg_IR <- Asthma_agg %>% 
-#   summarise_all(sum ) %>% 
-#   mutate(`IR per 1000` = `<12_month`/ At_risk*1000) %>% 
-#   as.data.frame()
-# 
+# Aggregating the National IR for all years
+ Asthma_agg_national_IR <- Asthma_agg %>%
+  summarise_at(c("<12_month", "At_risk"), sum ) %>%
+  mutate(`IR per 1000` = `<12_month`/ At_risk*1000) %>%
+  as.data.frame()
+
 
 # Printing Aggregated data to Excel
 write.xlsx(Asthma_agg_IR, "Results/Asthma_IR.xlsx", sheetName = "Aggregate", showNA=F, append = T, row.names = F)

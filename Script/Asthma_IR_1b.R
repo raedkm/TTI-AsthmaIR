@@ -57,11 +57,9 @@ for(i in 6:10){
     select("X._STATE", "INCIDNT") %>% 
     rename(FIPS =  X._STATE ) %>% 
     filter(!FIPS  %in% exlude_state ) %>% 
-    group_by(FIPS, INCIDNT) %>% 
     count(INCIDNT) %>%
-    spread(INCIDNT, n) %>% 
-    full_join(FIPS) %>% 
-    arrange(FIPS)
+    spread(INCIDNT, n)  
+
   
   
   
@@ -69,12 +67,10 @@ for(i in 6:10){
     select("X._STATE", "INCIDNT", "CHILDWT_F") %>% 
     rename(FIPS =  X._STATE ) %>% 
     filter(!FIPS  %in% exlude_state ) %>% 
-    group_by(FIPS, INCIDNT) %>% 
+    group_by(INCIDNT) %>% 
     summarise(count = sum(CHILDWT_F, na.rm = T)) %>% 
-    spread(INCIDNT, count) %>% 
-    full_join(FIPS) %>% 
-    arrange(FIPS)
-  
+    spread(INCIDNT, count)
+
   
   
   # BRFSS Analysis
@@ -83,21 +79,18 @@ for(i in 6:10){
     select("X_STATE", "CASTHDX2") %>% 
     rename(FIPS =  X_STATE ) %>% 
     filter(!FIPS  %in% exlude_state ) %>% 
-    group_by(FIPS, CASTHDX2) %>% 
+    group_by(CASTHDX2) %>% 
     count(CASTHDX2) %>%
-    spread(CASTHDX2, n) %>% 
-    full_join(FIPS) %>% 
-    arrange(FIPS)
+    spread(CASTHDX2, n) 
+  
   
   BRFSS_weighted <- BRFSS %>% 
     select("X_STATE", "CASTHDX2", "X_CHILDWT") %>% 
     rename(FIPS =  X_STATE ) %>%
     filter(!FIPS  %in% exlude_state ) %>% 
-    group_by(FIPS, CASTHDX2) %>% 
+    group_by(CASTHDX2) %>% 
     summarise(count = sum(X_CHILDWT, na.rm = T)) %>% 
     spread(CASTHDX2, count) %>% 
-    full_join(FIPS) %>% 
-    arrange(FIPS) %>% 
     na_if(0) # The BRFSS had some values coded as zero when they should have been NA
   
   
@@ -119,7 +112,6 @@ for(i in 6:10){
     mutate(At_risk = `1_ACBS` + `2_BRFSS`) %>% 
     mutate(IR_per1000 = `1_ACBS` / At_risk*1000) %>% 
     select(FIPS,State, `1_ACBS`, At_risk, IR_per1000) %>% 
-    arrange(FIPS) %>% 
     rename(`<12_month` =  `1_ACBS`) 
   
   
@@ -142,10 +134,10 @@ for(i in 6:10){
   
   # Printing to Excel sheet
   
-  write.xlsx(Asthma_sample, "Results/Asthma_result.xlsx", sheetName = paste0("20", year, "_count"), showNA=F, append = T, row.names = F)
-  write.xlsx(Asthma_weighted, "Results/Asthma_result.xlsx", sheetName = paste0("20", year, "_weighted"), showNA=F, append = T,row.names = F)
-  write.xlsx(Asthma_IR, "Results/Asthma_IR.xlsx", sheetName = paste0("20", year), showNA=F, append = T, row.names = F)
-  write.xlsx(Asthma_PRV, "Results/Asthma_PRV.xlsx", sheetName = paste0("20", year), showNA=F, append = T, row.names = F)
+  write.xlsx(Asthma_sample, "Results/Asthma_result.xlsx", sheetName = paste0("20", year, "_count", "_N"), showNA=F, append = T, row.names = F)
+  write.xlsx(Asthma_weighted, "Results/Asthma_result.xlsx", sheetName = paste0("20", year, "_weighted", "_N"), showNA=F, append = T,row.names = F)
+  write.xlsx(Asthma_IR, "Results/Asthma_IR.xlsx", sheetName = paste0("20", year, "_N"), showNA=F, append = T, row.names = F)
+  write.xlsx(Asthma_PRV, "Results/Asthma_PRV.xlsx", sheetName = paste0("20", year, "_N"), showNA=F, append = T, row.names = F)
   
   
   

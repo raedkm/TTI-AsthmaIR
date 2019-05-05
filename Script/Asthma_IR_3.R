@@ -40,6 +40,13 @@ Asthma_agg_PRV <- Asthma_agg %>%
 
 range(Asthma_agg_PRV$`PRV per 100`)
 
+# # Aggregating the National PRV for all years
+# Asthma_agg_national_PRV <- Asthma_agg %>%
+#   summarise_at(c("1_BRFSS", "2_BRFSS"), sum ) %>%
+#   mutate(`PRV per 100` = `1_BRFSS`/ `2_BRFSS`*100) %>%
+#   rename(EVER = `1_BRFSS`, SAMPLE = `2_BRFSS`) %>% 
+#   as.data.frame()
+
 # Printing Aggregated data to Excel
 write.xlsx(Asthma_agg_PRV, "Results/Asthma_PRV.xlsx", sheetName = "Aggregate", showNA=F, append = T, row.names = F)
 
