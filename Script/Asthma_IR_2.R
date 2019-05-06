@@ -19,20 +19,23 @@ for(i in 2006:2010) {
   
   Asthma_result <- read_excel("Results/Asthma_IR.xlsx", sheet = i) %>% 
     select(FIPS, State,`<12_month`, `At_risk`) %>% 
+    mutate(Year = i) %>% 
     na.omit()
   
   print(Asthma_result)
   
   # Binding data sets by row
-  ifelse(i == "2006",   Asthma_agg <- Asthma_result, Asthma_agg <- Asthma_agg)
+
+
+  ifelse(i == "2006",   Asthma_agg <- Asthma_result, Asthma_agg <- bind_rows(Asthma_agg, Asthma_result))
   
-  Asthma_agg <- bind_rows(Asthma_agg, Asthma_result)
   
 }
 
 
 # Aggregating the IR by state for all years 
-Asthma_agg_IR <- Asthma_agg %>% 
+Asthma_agg_IR <- Asthma_agg %>%
+  select(-Year) %>% 
   group_by(FIPS, State) %>% 
   summarise_all(sum ) %>% 
   mutate(`IR per 1000` = `<12_month`/ At_risk*1000) %>% 
@@ -42,13 +45,25 @@ range(Asthma_agg_IR$`IR per 1000`)
 
 
 
-# Aggregating the National IR for all years
- Asthma_agg_national_IR <- Asthma_agg %>%
+# Aggregating the National IR by years
+ Asthma_agg_national_year_IR <- Asthma_agg %>%
+  group_by(Year) %>%
   summarise_at(c("<12_month", "At_risk"), sum ) %>%
   mutate(`IR per 1000` = `<12_month`/ At_risk*1000) %>%
   as.data.frame()
 
-
-# Printing Aggregated data to Excel
+ 
+ 
+ # Aggregating the National IR 
+ Asthma_agg_national_IR <- Asthma_agg_national_year_IR %>%
+   #group_by(Year) %>%
+   summarize(`<12_month` = sum(`<12_month`)/5,
+             At_risk = sum(At_risk)/5,
+            `IR per 1000` = `<12_month`/ At_risk*1000) %>%
+   mutate(Year = "'National") %>% 
+   as.data.frame()
+ 
+ 
+ # Printing Aggregated data to Excel
 write.xlsx(Asthma_agg_IR, "Results/Asthma_IR.xlsx", sheetName = "Aggregate", showNA=F, append = T, row.names = F)
 

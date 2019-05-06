@@ -104,9 +104,11 @@ inc <- read_excel(path_inc, sheet = "Aggregate") %>%
 
 
 # Estimating weighted IR
-read_excel(path_inc, sheet = "Aggregate") %>%   
+IR <- read_excel(path_inc, sheet = "Aggregate") %>%   
   summarise(IR = sum(`<12_month`)/sum(At_risk))
-weighted_IR <- 0.0123
+weighted_IR <- IR[[1]]
+
+
 
 
 
@@ -121,9 +123,10 @@ prv <- read_excel(path_prv, sheet = "Aggregate") %>%
 
 
 # Estimating weighted PRV
-read_excel(path_prv, sheet = "Aggregate") %>%   
+PRV <- read_excel(path_prv, sheet = "Aggregate") %>%   
   summarise(PRV = sum(EVER)/sum(SAMPLE))
-weighted_PRV <- 0.150
+
+weighted_PRV <- PRV[[1]] 
 
 
 

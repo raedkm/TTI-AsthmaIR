@@ -127,8 +127,8 @@ for(i in 6:10){
   
   Asthma_PRV <- Asthma_sample %>% 
     mutate(SAMPLE = `1_BRFSS` + `2_BRFSS`) %>% 
-    mutate(PRV_per100 = `1_BRFSS`/ SAMPLE * 100) %>% 
-    rename(EVER =  `1_BRFSS`) %>% 
+    rename(EVER =  `1_BRFSS`) %>%
+    mutate(PRV_per100 = EVER/ SAMPLE * 100) %>% 
     select(FIPS,State, EVER, SAMPLE, PRV_per100) %>% 
     arrange(FIPS)
   
