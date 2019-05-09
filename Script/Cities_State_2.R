@@ -12,44 +12,29 @@ sketch = htmltools::withTags(table(
   class = 'display',
   thead(
     tr(
-      th(rowspan = 2, 'FIPS'),
-      th(rowspan = 2, 'City'),
-      th(rowspan = 2, 'State'),
+      th('FIPS'),
+      th('City'),
+      th('State'),
       th('Total Children'),
       th('Total Cases'),
       th('NO2  Attributable Cases'),
       th('NO2  Fraction'),
       th('NO2  Concentration')
-    ),
-    tr(
-      lapply(rep(c('2010'), 5), th)
+    )
     )
   )
-))
+)
 print(sketch)
 
 
 # Table with container
-<<<<<<< HEAD
-datatable(cities_table, filter = 'top', options = list(
-  pageLength = 50, autoWidth = TRUE))
-
-cities_state_IT <- datatable(cities_table, filter = 'top', 
-=======
 table_IR <- datatable(cities_table, filter = 'top', 
->>>>>>> 638b937b05b6d4b2d7de0160e650055819ef9d2f
           options = list(pageLength = 50, autoWidth = TRUE), 
           class = 'cell-border stripe',
           editable = F,
-          colnames = c('Total Population 2000' = 4),
           container = sketch,
           rownames = FALSE) 
 
 
-<<<<<<< HEAD
 # Saving file
-
-htmltools::save_html(cities_state_IT, file = "500_cities_stateIR.html")
-=======
 saveWidget(table_IR, file = "cities_state_IR.html")
->>>>>>> 638b937b05b6d4b2d7de0160e650055819ef9d2f

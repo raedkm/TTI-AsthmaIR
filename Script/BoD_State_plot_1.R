@@ -24,7 +24,7 @@ options(scipen=10000)
 
 # Sampling data set
 set.seed(1)
-index <- sample(1:nrow(burden), 100000)
+index <- sample(1:nrow(burden), 1000000)
 burden_s <- burden[index, ]
 
 # Plotting ----------------------------------------------------------------
@@ -99,19 +99,9 @@ burden_s %>%
 #ggtitle("Change in the percentage of all asthma incident cases due to TRAP between 2000 and 2010") 
 #coord_flip() 
 
+
+
 # 8.	NO2 concentration by state and living location
-burden_s %>%
-  ggplot(aes(x= INCOME, y = NO2)) +
-  facet_wrap( ~ STATE, nrow =  7 ) +
-  geom_boxplot() + 
-  theme_bw() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=1)) +
-#ggtitle("Change in the percentage of all asthma incident cases due to TRAP between 2000 and 2010") 
-coord_flip() 
-
-
-
-# 9.	NO2 concentration by state and median income grp
 burden_s %>%
   ggplot(aes(x= URBAN, y = NO2)) +
   facet_wrap( ~ STATE, nrow =  7 ) +
@@ -119,7 +109,20 @@ burden_s %>%
   theme_bw() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=1)) +
 #ggtitle("Change in the percentage of all asthma incident cases due to TRAP between 2000 and 2010") 
+coord_flip()
+
+
+
+# 9.	NO2 concentration by state and median income grp
+burden_s %>%
+  ggplot(aes(x= INCOME, y = NO2)) +
+  facet_wrap( ~ STATE , nrow =  7 ) +
+  geom_boxplot() + 
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=1)) +
+#ggtitle("Change in the percentage of all asthma incident cases due to TRAP between 2000 and 2010") 
 coord_flip() 
+
 
 
 
