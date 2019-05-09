@@ -218,6 +218,6 @@ burden_s %>%
 
 # Scatter plot ------------------------------------------------------------
 burden_s %>% 
-ggplot(aes(x = NO2, y = TOTAL, col = INCOME))+
+ggplot(aes(x = NO2, y = TOTAL))+
   geom_point() +
  coord_flip()
