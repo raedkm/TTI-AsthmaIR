@@ -30,12 +30,16 @@ burden_s <- burden[index, ]
 
 # Plotting ----------------------------------------------------------------
 
+<<<<<<< HEAD
  jpeg('Plots/rplot.jpg')
  
+=======
+>>>>>>> 5e5f59b406ba2c12af3a1bbac5839a614352064a
 
 
 # 2.	NO2 concentration 
 
+<<<<<<< HEAD
 burden_s %>%
   ggplot(aes(y = NO2)) +
   geom_boxplot() + 
@@ -162,6 +166,121 @@ burden_s %>%
 #ggtitle("Change in the percentage of all asthma incident cases due to TRAP between 2000 and 2010") 
 #coord_flip() 
   ggsave("p10.png" ,path = "Plots")
+=======
+burden_s %>%
+  ggplot(aes(y = NO2)) +
+  geom_boxplot() + 
+  theme_bw()
+  #theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust=1)) 
+  #labs( y = "AF", x = "") +
+  #scale_fill_discrete(name = "Year") 
+#  gtitle("Change in the percentage of all asthma incident cases due to TRAP between 2000 and 2010") 
+#coord_flip() 
+
+
+
+# 3.	NO2 concentration by living location
+burden_s %>%
+  ggplot(aes(x = URBAN, y = NO2)) +
+  geom_boxplot() + 
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust=1)) 
+#ggtitle("Change in the percentage of all asthma incident cases due to TRAP between 2000 and 2010") 
+#coord_flip() 
+
+
+
+# 4.	NO2 concentration by median income grp
+burden_s %>%
+  ggplot(aes(x = INCOME, y = NO2)) +
+  geom_boxplot() + 
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust=1)) 
+#ggtitle("Change in the percentage of all asthma incident cases due to TRAP between 2000 and 2010") 
+#coord_flip() 
+
+
+
+# 5.	NO2 concentration by living location stratified into median income grp
+burden_s %>%
+  ggplot(aes(x = URBAN, y = NO2)) +
+  facet_grid( ~ INCOME) +
+  geom_boxplot() + 
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust=1)) 
+#ggtitle("Change in the percentage of all asthma incident cases due to TRAP between 2000 and 2010") 
+#coord_flip() 
+
+
+
+# 6.	NO2 concentration by median income grp stratified into living location
+burden_s %>%
+  ggplot(aes(x = INCOME, y = NO2)) +
+  facet_grid( ~ URBAN) +
+  geom_boxplot() + 
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust=1)) 
+#ggtitle("Change in the percentage of all asthma incident cases due to TRAP between 2000 and 2010") 
+#coord_flip() 
+
+
+# 7.	NO2 concentration by state
+burden_s %>%
+  ggplot(aes(x= STATE, y = NO2)) +
+  geom_boxplot() + 
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust=1)) 
+#ggtitle("Change in the percentage of all asthma incident cases due to TRAP between 2000 and 2010") 
+#coord_flip() 
+
+
+
+# 8.	NO2 concentration by state and living location
+burden_s %>%
+  ggplot(aes(x= URBAN, y = NO2)) +
+  facet_wrap( ~ STATE, nrow =  7 ) +
+  geom_boxplot() + 
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=1)) +
+#ggtitle("Change in the percentage of all asthma incident cases due to TRAP between 2000 and 2010") 
+coord_flip()
+
+
+
+# 9.	NO2 concentration by state and median income grp
+burden_s %>%
+  ggplot(aes(x= INCOME, y = NO2)) +
+  facet_wrap( ~ STATE , nrow =  7 ) +
+  geom_boxplot() + 
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=1)) +
+#ggtitle("Change in the percentage of all asthma incident cases due to TRAP between 2000 and 2010") 
+coord_flip() 
+
+
+
+
+# 10.	Attributable Fraction (AF)
+burden_s %>%
+  ggplot(aes(y = AF)) +
+  geom_boxplot() + 
+  theme_bw()
+#theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust=1)) 
+#labs( y = "AF", x = "") +
+#scale_fill_discrete(name = "Year") 
+#  gtitle("Change in the percentage of all asthma incident cases due to TRAP between 2000 and 2010") 
+#coord_flip() 
+
+
+# 11.	AF concentration by living location
+burden_s %>%
+  ggplot(aes(x = URBAN, y = AF)) +
+  geom_boxplot() + 
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust=1)) 
+#ggtitle("Change in the percentage of all asthma incident cases due to TRAP between 2000 and 2010") 
+#coord_flip() 
+>>>>>>> 5e5f59b406ba2c12af3a1bbac5839a614352064a
 
 
 
@@ -170,10 +289,16 @@ burden_s %>%
   ggplot(aes(x = INCOME, y = AF)) +
   geom_boxplot() + 
   theme_bw()+
+<<<<<<< HEAD
   theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust=1)) +
 #ggtitle("Change in the percentage of all asthma incident cases due to TRAP between 2000 and 2010") 
 #coord_flip() 
   ggsave("p11.png" ,path = "Plots")
+=======
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust=1)) 
+#ggtitle("Change in the percentage of all asthma incident cases due to TRAP between 2000 and 2010") 
+#coord_flip() 
+>>>>>>> 5e5f59b406ba2c12af3a1bbac5839a614352064a
 
 
 
@@ -183,19 +308,30 @@ burden_s %>%
   facet_grid( ~ INCOME) +
   geom_boxplot() + 
   theme_bw()+
+<<<<<<< HEAD
   theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust=1)) +
 #ggtitle("Change in the percentage of all asthma incident cases due to TRAP between 2000 and 2010") 
 #coord_flip() 
   ggsave("p12.png" ,path = "Plots")
+=======
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust=1)) 
+#ggtitle("Change in the percentage of all asthma incident cases due to TRAP between 2000 and 2010") 
+#coord_flip() 
+>>>>>>> 5e5f59b406ba2c12af3a1bbac5839a614352064a
 
 
 
 # 14.	AF concentration by median income grp stratified into living location
+<<<<<<< HEAD
  burden_s %>%
+=======
+burden_s %>%
+>>>>>>> 5e5f59b406ba2c12af3a1bbac5839a614352064a
   ggplot(aes(x = INCOME, y = AF)) +
   facet_grid( ~ URBAN) +
   geom_boxplot() + 
   theme_bw()+
+<<<<<<< HEAD
   theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust=1)) +
 #ggtitle("Change in the percentage of all asthma incident cases due to TRAP between 2000 and 2010") 
 #coord_flip() 
@@ -232,11 +368,34 @@ burden_s %>%
 # 17.	AF by state and living location
 burden_s %>%
   ggplot(aes(x= URBAN, y = AF)) +
+=======
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust=1)) 
+#ggtitle("Change in the percentage of all asthma incident cases due to TRAP between 2000 and 2010") 
+#coord_flip() 
+
+
+
+# 15.	AF by state 
+burden_s %>%
+  ggplot(aes(x= STATE, y = AF)) +
+  geom_boxplot() + 
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust=1)) 
+#ggtitle("Change in the percentage of all asthma incident cases due to TRAP between 2000 and 2010") 
+#coord_flip() 
+
+
+
+# 16.	AF by state and median income grp
+burden_s %>%
+  ggplot(aes(x= INCOME, y = AF)) +
+>>>>>>> 5e5f59b406ba2c12af3a1bbac5839a614352064a
   facet_wrap( ~ STATE, nrow =  7 ) +
   geom_boxplot() + 
   theme_bw() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=1)) +
   #ggtitle("Change in the percentage of all asthma incident cases due to TRAP between 2000 and 2010") 
+<<<<<<< HEAD
   coord_flip() +
   ggsave("p16.png" ,path = "Plots")
 
@@ -254,3 +413,26 @@ burden_s %>%
 
 
 
+=======
+  coord_flip() 
+
+
+
+# 17.	AF by state and living location
+burden_s %>%
+  ggplot(aes(x= URBAN, y = AF)) +
+  facet_wrap( ~ STATE, nrow =  7 ) +
+  geom_boxplot() + 
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust=1)) +
+  #ggtitle("Change in the percentage of all asthma incident cases due to TRAP between 2000 and 2010") 
+  coord_flip() 
+
+
+
+# Scatter plot ------------------------------------------------------------
+burden_s %>% 
+ggplot(aes(x = NO2, y = TOTAL, col = INCOME))+
+  geom_point() +
+ coord_flip()
+>>>>>>> 5e5f59b406ba2c12af3a1bbac5839a614352064a

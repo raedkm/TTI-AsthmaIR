@@ -21,6 +21,11 @@ BLOCK_U <- burden %>%
   group_by(URBAN) %>% 
   count()
 
+
+POP <- burden %>% 
+  summarise(POP = sum(TOTAL))
+
+
 CHILDREN <- burden %>% 
   summarise(CHILDREN = sum(CHILDREN), 
             ASTHMA = sum(CASES) ,
@@ -48,11 +53,11 @@ CHILDREN_INCOME <- burden %>%
 # Results tables ----------------------------------------------------------
 
 
-table_a <- bind_rows(CHILDREN, CHILDREN_URBAN, CHILDREN_INCOME) %>% 
-  select(URBAN, INCOME, CHILDREN, ASTHMA, AC, AF) %>% as.data.frame()
+table_a <- bind_rows(POP, CHILDREN, CHILDREN_URBAN, CHILDREN_INCOME) %>% 
+  select(URBAN, INCOME, POP, CHILDREN, ASTHMA, AC, AF) %>% as.data.frame()
 
-table_1 <- bind_rows(BLOCK, BLOCK_U, CHILDREN, CHILDREN_URBAN, CHILDREN_INCOME) %>% 
-  select(URBAN, INCOME, n, CHILDREN) %>% as.data.frame()
+table_1 <- bind_rows(BLOCK, BLOCK_U, POP, CHILDREN, CHILDREN_URBAN, CHILDREN_INCOME) %>% 
+  select(URBAN, INCOME, n, POP, CHILDREN) %>% as.data.frame()
   
 table_2 <- bind_rows(CHILDREN, CHILDREN_URBAN, CHILDREN_INCOME) %>% 
   select(URBAN, INCOME,ASTHMA) %>% as.data.frame()
@@ -63,6 +68,9 @@ table_3 <- bind_rows(CHILDREN, CHILDREN_URBAN, CHILDREN_INCOME) %>%
 
 POLLUT <- burden %>% 
   select(NO2) %>% 
+  summarise( Mean = mean(NO2),
+             Min = min(NO2), 
+             )
   summary() %>% as.data.frame() 
 
 
