@@ -2,19 +2,7 @@ library(scales)
 
 
 
-# Renaming levels on income -----------------------------------------------
 
-
-burden_s<- burden %>% 
-  mutate(INCOME = recode(burden$INCOME,  "<20,000" = "<$20,000" , 
-                         "20,000 to <35,000" = "$20,000 to <$35,000", 
-                         "35,000 to <50,000" = "$35,000 to <$50,000", 
-                         "50,000 to <75,000" = "$50,000 to <$75,000" , 
-                         ">=75,000" = ">=$75,000")
-  )
-
-
-levels(burden_s$INCOME)
 
 
 
@@ -25,6 +13,9 @@ theme_bod <-
   
   
   
+
+# Top contenders ----------------------------------------------------------
+
   
 burden_s %>%
   ggplot(aes(x= INCOME, y = AF)) +
@@ -58,6 +49,8 @@ burden_s %>%
 
 
 
+
+# Theme testing -----------------------------------------------------------
 
 burden_s %>%
   ggplot(aes(x= INCOME, y = AF)) +
