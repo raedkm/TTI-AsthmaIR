@@ -45,7 +45,7 @@ range(Asthma_agg_IR$`IR per 1000`)
 
 
 
-# Aggregating the National IR by years
+# Aggregating the National IR by year
  Asthma_agg_national_year_IR <- Asthma_agg %>%
   group_by(Year) %>%
   summarise_at(c("<12_month", "At_risk"), sum ) %>%

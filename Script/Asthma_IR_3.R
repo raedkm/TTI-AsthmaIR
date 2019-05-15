@@ -45,7 +45,7 @@ range(Asthma_agg_PRV$`PRV per 100`)
 
 
 
-# Aggregating the National IR by years
+# Aggregating the National PRV by years
 Asthma_agg_national_year_PRV <- Asthma_agg %>%
   group_by(Year) %>%
   summarise_at(c("EVER", "SAMPLE"), sum ) %>%
@@ -54,7 +54,7 @@ Asthma_agg_national_year_PRV <- Asthma_agg %>%
 
 
 
-# Aggregating the National IR 
+# Aggregating the National PRV 
 Asthma_agg_national_PRV <- Asthma_agg_national_year_PRV %>%
   #group_by(Year) %>%
   summarize(EVER = sum(EVER)/5,

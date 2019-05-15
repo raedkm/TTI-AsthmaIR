@@ -26,7 +26,7 @@ library(readxl)
 # Loading data set
 
 load("Data/FIPS.R")
-FIPS$FIPS <- as.double(FIPS$FIPS)
+FIPS$FIPS <- as.double(FIPS$FIPS) #To be used to add FIPS code and state names to data sets
 
 
 # Creating for loop to run the code for the years 2006-2010
@@ -123,7 +123,7 @@ for(i in 6:10){
     rename(`<12_month` =  `1_ACBS`) 
   
   
-  # Prevalance Rate Estimation
+  # Prevalance Rate EstimationEstimat
   
   Asthma_PRV <- Asthma_sample %>% 
     mutate(SAMPLE = `1_BRFSS` + `2_BRFSS`) %>% 
