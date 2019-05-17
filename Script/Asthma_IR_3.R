@@ -1,7 +1,7 @@
 #---------------------------------------------#
 #Project : State specific childhood Asthma incidence rate
 #Part : (03) Estimating aggregate (2006-2010) astham PRV across states 
-#Purpose: Conduct the burden modeling and estimate results by state/urban
+#Purpose: Conduct the burden modeling and estimate results by state
 #Created by Raed Alotaibi
 #Date Created: March-12-2019
 #---------------------------------------------#
