@@ -142,10 +142,10 @@ for(i in 6:10){
   
   # Printing to Excel sheet
   
-  write.xlsx(Asthma_sample, "Results/Asthma_result.xlsx", sheetName = paste0("20", year, "_count"), showNA=F, append = T, row.names = F)
-  write.xlsx(Asthma_weighted, "Results/Asthma_result.xlsx", sheetName = paste0("20", year, "_weighted"), showNA=F, append = T,row.names = F)
-  write.xlsx(Asthma_IR, "Results/Asthma_IR.xlsx", sheetName = paste0("20", year), showNA=F, append = T, row.names = F)
-  write.xlsx(Asthma_PRV, "Results/Asthma_PRV.xlsx", sheetName = paste0("20", year), showNA=F, append = T, row.names = F)
+  write.xlsx(Asthma_sample, "Results/Tables/Asthma_result.xlsx", sheetName = paste0("20", year, "_count"), showNA=F, append = T, row.names = F)
+  write.xlsx(Asthma_weighted, "Results/Tables/Asthma_result.xlsx", sheetName = paste0("20", year, "_weighted"), showNA=F, append = T,row.names = F)
+  write.xlsx(Asthma_IR, "Results/Tables/Asthma_IR.xlsx", sheetName = paste0("20", year), showNA=F, append = T, row.names = F)
+  write.xlsx(Asthma_PRV, "Results/Tables/Asthma_PRV.xlsx", sheetName = paste0("20", year), showNA=F, append = T, row.names = F)
   
   
   

@@ -17,7 +17,7 @@ for(i in 2006:2010) {
   print(i)
   
   
-  Asthma_result <- read_excel("Results/Asthma_IR.xlsx", sheet = i) %>% 
+  Asthma_result <- read_excel("Results/Tables/Asthma_IR.xlsx", sheet = i) %>% 
     select(FIPS, State,`<12_month`, `At_risk`) %>% 
     mutate(Year = i) %>% 
     na.omit()
@@ -65,5 +65,5 @@ range(Asthma_agg_IR$`IR per 1000`)
  
  
  # Printing Aggregated data to Excel
-write.xlsx(Asthma_agg_IR, "Results/Asthma_IR.xlsx", sheetName = "Aggregate", showNA=F, append = T, row.names = F)
+write.xlsx(Asthma_agg_IR, "Results/Tables/Asthma_IR.xlsx", sheetName = "Aggregate", showNA=F, append = T, row.names = F)
 

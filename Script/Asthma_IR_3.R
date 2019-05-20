@@ -18,7 +18,7 @@ for(i in 2006:2010) {
   i <- paste0(i, "_weighted")
   print(i)
   
-  Asthma_result <- read_excel("Results/Asthma_result.xlsx", sheet = i) %>% 
+  Asthma_result <- read_excel("Results/Tables/Asthma_result.xlsx", sheet = i) %>% 
     select(FIPS, State,`1_BRFSS`, `2_BRFSS`) %>% 
     mutate(Year = j) %>%
     mutate(SAMPLE = `1_BRFSS` + `2_BRFSS`) %>% 
@@ -66,7 +66,7 @@ Asthma_agg_national_PRV <- Asthma_agg_national_year_PRV %>%
 
 
 # Printing Aggregated data to Excel
-write.xlsx(Asthma_agg_PRV, "Results/Asthma_PRV.xlsx", sheetName = "Aggregate", showNA=F, append = T, row.names = F)
+write.xlsx(Asthma_agg_PRV, "Results/Tables/Asthma_PRV.xlsx", sheetName = "Aggregate", showNA=F, append = T, row.names = F)
 
 
 
@@ -86,7 +86,7 @@ table_8 <- table_IR %>%
 
 colnames(table_8) <- names 
 
-write.xlsx(table_8, "Results/table_8.xlsx",  append = F, row.names = T)
+write.xlsx(table_8, "Results/Tables/table_8.xlsx",  append = F, row.names = T)
 
 
 
@@ -96,4 +96,4 @@ table_9 <- Asthma_agg_IR %>%
   left_join(Asthma_agg_PRV, by = c("FIPS", "State")) %>% 
   select(State, SAMPLE, EVER, `<12_month`, At_risk, `IR per 1000`, `PRV per 100`)
 
-write.xlsx(table_9, "Results/table_9.xlsx",  append = F, row.names = F)
+write.xlsx(table_9, "Results/Tables/table_9.xlsx",  append = F, row.names = F)

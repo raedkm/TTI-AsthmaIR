@@ -95,7 +95,7 @@ lur <- fread("Data\\Pollutant\\NO2_2010.csv", data.table = F, stringsAsFactors =
 
 # Loading state-specific asthma IR data -----------------------------------
 
-path_inc <- "Results\\Asthma_IR.xlsx"
+path_inc <- "Results/Tables/Asthma_IR.xlsx"
 
 inc <- read_excel(path_inc, sheet = "Aggregate") %>% 
   mutate(IR = as.double(`IR per 1000`/1000)) %>% 
@@ -114,7 +114,7 @@ weighted_IR <- IR[[1]]
 
 # Loading state-specific asthma  PRV rate ---------------------------------
 
-path_prv <- "Results\\Asthma_PRV.xlsx"
+path_prv <- "Results/Tables/Asthma_PRV.xlsx"
 
 prv <- read_excel(path_prv, sheet = "Aggregate") %>% 
   mutate(PRV = as.double(`PRV per 100`/100)) %>% 

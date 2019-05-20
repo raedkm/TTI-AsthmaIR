@@ -11,10 +11,8 @@ library(readxl)
 library(dplyr)
 
 
-Asthma_count <- read_excel("Data/Asthma_count.xlsx")
-
-
-State_in <- read_excel("Data/Asthma_count_State.xlsx")
+Asthma_count <- read_excel("Results/Tables/Asthma_count.xlsx")
+State_in <- read_excel("Results/Tables/Asthma_count_State.xlsx")
   
 
 

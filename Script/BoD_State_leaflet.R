@@ -118,19 +118,10 @@ leaf_map <- function(pollutant) {
 NO2_map <- leaf_map('NO2')
 NO2_map
 
-PM25_map <- leaf_map('PM2.5')
-PM25_map
-
-PM10_map <- leaf_map('PM10')
-PM10_map
 
 
 # Saving the Maps
 saveWidget(NO2_map, file = "C:/Users/R-Alotaibi/Desktop/BoD/Interactive_Maps/NO2_leaf_b.html")
-
-saveWidget(PM25_map, file = "Interactive_Maps/PM25_leaf_b.html")
-
-saveWidget(PM10_map, file = "Interactive_Maps/PM10_leaf_b.html")
 
 
 
