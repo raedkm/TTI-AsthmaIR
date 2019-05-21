@@ -144,3 +144,32 @@ burden_s %>%
 
 
 
+
+# Creating mean boxplots instead of median --------------------------------
+
+# function for computing mean, DS, max and min values
+min.mean.sd.max <- function(x) {
+  r <- c(min(x), mean(x) - sd(x), mean(x), mean(x) + sd(x), max(x))
+  names(r) <- c("ymin", "lower", "middle", "upper", "ymax")
+  r
+}
+
+stat_mean <- stat_summary(fun.data = min.mean.sd.max, geom = "boxplot")  
+state_jitter <-   geom_jitter(position=position_jitter(width=.2), size=3)
+
+# ggplot code
+p1 <- ggplot(aes(y = value, x = factor(group)), data = mydata)
+p1 <- p1 + stat_summary(fun.data = min.mean.sd.max, geom = "boxplot") + geom_jitter(position=position_jitter(width=.2), size=3) 
+
+# 12.	AF by state 
+burden_s %>%
+  ggplot(aes(x= reorder(STATE, AF, FUN = mean), y = AF)) +
+  geom_boxplot() + 
+  theme_bw()+
+  theme_text2 +
+  scale_y_bod2 
+
+
+
+
+ 

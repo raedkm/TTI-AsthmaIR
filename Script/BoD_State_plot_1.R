@@ -1,7 +1,7 @@
 #---------------------------------------------#
 #Project : State specific Burden of childhood asthma due to TRAP - 2019
-#Sub     : Plots
-#Part    : (01) Preparing plots 
+#Sub     : Results/Plots
+#Part    : (01) Preparing Results/Plots 
 #Purpose : Read in census data, income data, NO2 conc, incidence rate (state-specifi), and prevelance rate (state, specific)
 #         Followed by joining the data sets and replacing missing IR/PRV with weighted averages
 #Created by Raed Alotaibi
@@ -77,8 +77,8 @@ scale_y_bod2 <-   scale_y_continuous(breaks  = breaks_m,  labels = percent_forma
   geom_boxplot() + 
   theme_bw()+
   theme_text +
-  scale_y_no2+
-  ggsave("p1.png" ,path = "Plots",  width = 9.5, height = 6,  dpi = 920, pointsize=12 )
+  scale_y_no2 +
+  ggsave("p1.png" ,path = "Results/Plots",  width = 9.5, height = 6,  dpi = 360, pointsize=12 )
 
                   
 
@@ -89,7 +89,7 @@ scale_y_bod2 <-   scale_y_continuous(breaks  = breaks_m,  labels = percent_forma
   theme_bw()+
   theme_text +
    scale_y_no2+
-  ggsave("p2.png" ,path = "Plots",  width = 9.5, height = 6,  dpi = 920, pointsize=12)
+  ggsave("p2.png" ,path = "Results/Plots",  width = 9.5, height = 6,  dpi = 360, pointsize=12)
 
 
 
@@ -101,7 +101,7 @@ burden_s %>%
   theme_bw()+
   theme_text +
   scale_y_no2+
-  ggsave("p3.png" ,path = "Plots", width = 9.5, height = 6,  dpi = 920, pointsize=12)
+  ggsave("p3.png" ,path = "Results/Plots", width = 9.5, height = 6,  dpi = 360, pointsize=12)
 
 
 
@@ -113,17 +113,17 @@ burden_s %>%
   theme_bw()+
   theme_text +
    scale_y_no2+
-  ggsave("p4.png" ,path = "Plots", width = 9.5, height = 6,  dpi = 920, pointsize=12)
+  ggsave("p4.png" ,path = "Results/Plots", width = 9.5, height = 6,  dpi = 360, pointsize=12)
 
 
 # 5.	NO2 concentration by state
 burden_s %>%
-  ggplot(aes(x= reorder(STATE, NO2, FUN = median), y = NO2)) +
+  ggplot(aes(x= reorder(STATE, NO2, FUN = mean), y = NO2)) +
   geom_boxplot() + 
   theme_bw()+
   theme_text2 +
   scale_y_no2+
-  ggsave("p5.png" ,path = "Plots", width = 9.5, height = 6,  dpi = 920, pointsize=12)
+  ggsave("p5.png" ,path = "Results/Plots", width = 9.5, height = 6,  dpi = 360, pointsize=12)
 
 
 
@@ -135,7 +135,7 @@ burden_s %>%
   theme_bw() +
   theme_text2 +
   scale_y_no2+
-  ggsave("p6.png" ,path = "Plots", width = 9.5, height = 12,  dpi = 920, pointsize=12)
+  ggsave("p6.png" ,path = "Results/Plots", width = 9.5, height = 12,  dpi = 360, pointsize=12)
 
 
 
@@ -147,7 +147,7 @@ burden_s %>%
   theme_bw() +
   theme_text2 +
   scale_y_no2+
-  ggsave("p7.png" ,path = "Plots", width = 9.5, height = 12,  dpi = 920, pointsize=12)
+  ggsave("p7.png" ,path = "Results/Plots", width = 9.5, height = 12,  dpi = 360, pointsize=12)
 
 
 
@@ -158,7 +158,7 @@ burden_s %>%
   theme_bw()+
   theme_text2 +
   scale_y_bod +
-  ggsave("p8.png" ,path = "Plots" , width = 9.5, height = 6,  dpi = 920, pointsize=12)
+  ggsave("p8.png" ,path = "Results/Plots" , width = 9.5, height = 6,  dpi = 360, pointsize=12)
 
 
 
@@ -169,7 +169,7 @@ burden_s %>%
   theme_bw()+
   theme_text2 +
   scale_y_bod +
-  ggsave("p9.png" ,path = "Plots", width = 9.5, height = 6,  dpi = 920, pointsize=12)
+  ggsave("p9.png" ,path = "Results/Plots", width = 9.5, height = 6,  dpi = 360, pointsize=12)
 
 
 
@@ -181,7 +181,7 @@ burden_s %>%
   theme_bw()+
   theme_text2 +
   scale_y_bod +
-  ggsave("p10.png" ,path = "Plots", width = 9.5, height = 6,  dpi = 920, pointsize=12)
+  ggsave("p10.png" ,path = "Results/Plots", width = 9.5, height = 6,  dpi = 360, pointsize=12)
 
 
 
@@ -193,18 +193,18 @@ burden_s %>%
   theme_bw()+
   theme_text2 +
   scale_y_bod +
-   ggsave("p11.png" ,path = "Plots", width = 9.5, height = 6,  dpi = 920, pointsize=12)
+   ggsave("p11.png" ,path = "Results/Plots", width = 9.5, height = 6,  dpi = 360, pointsize=12)
  
 
 
 # 12.	AF by state 
  burden_s %>%
-   ggplot(aes(x= reorder(STATE, AF, FUN = median), y = AF)) +
+   ggplot(aes(x= reorder(STATE, AF, FUN = mean), y = AF)) +
    geom_boxplot() + 
    theme_bw()+
    theme_text2 +
    scale_y_bod2 +
-   ggsave("p12.png" ,path = "Plots", width = 9.5, height = 6,  dpi = 920, pointsize=12)
+   ggsave("p12.png" ,path = "Results/Plots", width = 9.5, height = 6,  dpi = 360, pointsize=12)
  
  
 
@@ -216,7 +216,7 @@ burden_s %>%
   theme_bw() +
   theme_text2 +
   scale_y_bod2 +
-  ggsave("p13.png" ,path = "Plots", width = 9.5, height = 12,  dpi = 920, pointsize=12)
+  ggsave("p13.png" ,path = "Results/Plots", width = 9.5, height = 12,  dpi = 360, pointsize=12)
 
 
 
@@ -228,7 +228,7 @@ burden_s %>%
   theme_bw() +
   theme_text2 +
   scale_y_bod2 +
-  ggsave("p14.png" ,path = "Plots", width = 9.5, height = 12,  dpi = 920, pointsize=12)
+  ggsave("p14.png" ,path = "Results/Plots", width = 9.5, height = 12,  dpi = 360, pointsize=12)
 
 
 
