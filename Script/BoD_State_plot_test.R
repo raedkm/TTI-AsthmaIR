@@ -28,6 +28,7 @@ burden_s %>%
   ggsave("theme_dark.png" ,path = "Plots",  width = 9.5, height = 12,  dpi = 920, pointsize=12 )
 
 
+
 burden_s %>%
   ggplot(aes(x= INCOME, y = AF)) +
   facet_wrap( ~ STATE, nrow =  7 ) +
@@ -45,7 +46,6 @@ burden_s %>%
   geom_boxplot() + 
   theme_dark()+
   scale_y_continuous(breaks  = breaks_m,  labels = scales::percent_format(accuracy = 0.5))
-
 
 
 

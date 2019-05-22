@@ -68,6 +68,8 @@ scale_y_bod <-   scale_y_continuous(breaks  = breaks_m,  labels = percent_format
 breaks_m <- seq(0,0.5,0.05)
 scale_y_bod2 <-   scale_y_continuous(breaks  = breaks_m,  labels = percent_format(accuracy = 1))
 
+mean_dot <- stat_summary(fun.y=mean, geom="point", shape=20, size=2, color="red", fill="red") 
+
 # Plotting ----------------------------------------------------------------
 
 
@@ -75,6 +77,7 @@ scale_y_bod2 <-   scale_y_continuous(breaks  = breaks_m,  labels = percent_forma
  burden_s %>%
   ggplot(aes(x = URBAN, y = NO2)) +
   geom_boxplot() + 
+  mean_dot +
   theme_bw()+
   theme_text +
   scale_y_no2 +
@@ -86,6 +89,7 @@ scale_y_bod2 <-   scale_y_continuous(breaks  = breaks_m,  labels = percent_forma
  burden_s %>%
   ggplot(aes(x = INCOME, y = NO2)) +
   geom_boxplot() + 
+   mean_dot() + 
   theme_bw()+
   theme_text +
    scale_y_no2+
@@ -97,7 +101,8 @@ scale_y_bod2 <-   scale_y_continuous(breaks  = breaks_m,  labels = percent_forma
 burden_s %>%
   ggplot(aes(x = URBAN, y = NO2)) +
   facet_grid( ~ INCOME) +
-  geom_boxplot() + 
+  geom_boxplot(aes(middle = mean(NO2))) + 
+  mean_dot +
   theme_bw()+
   theme_text +
   scale_y_no2+
@@ -110,6 +115,7 @@ burden_s %>%
   ggplot(aes(x = INCOME, y = NO2)) +
   facet_grid( ~ URBAN) +
   geom_boxplot() + 
+   mean_dot +
   theme_bw()+
   theme_text +
    scale_y_no2+
@@ -119,7 +125,8 @@ burden_s %>%
 # 5.	NO2 concentration by state
 burden_s %>%
   ggplot(aes(x= reorder(STATE, NO2, FUN = mean), y = NO2)) +
-  geom_boxplot() + 
+  geom_boxplot( aes(middle = mean(NO2, na.rm = T))) + 
+  mean_dot +
   theme_bw()+
   theme_text2 +
   scale_y_no2+
@@ -132,6 +139,7 @@ burden_s %>%
   ggplot(aes(x= INCOME, y = NO2)) +
   facet_wrap( ~ STATE, nrow =  7 ) +
   geom_boxplot() + 
+  mean_dot +
   theme_bw() +
   theme_text2 +
   scale_y_no2+
@@ -144,6 +152,7 @@ burden_s %>%
   ggplot(aes(x= URBAN, y = NO2)) +
   facet_wrap( ~ STATE, nrow =  7 ) +
   geom_boxplot() + 
+  mean_dot +
   theme_bw() +
   theme_text2 +
   scale_y_no2+
@@ -155,6 +164,7 @@ burden_s %>%
 burden_s %>%
   ggplot(aes(x = URBAN, y = AF)) +
   geom_boxplot() + 
+  mean_dot +
   theme_bw()+
   theme_text2 +
   scale_y_bod +
@@ -166,6 +176,7 @@ burden_s %>%
 burden_s %>%
   ggplot(aes(x = INCOME, y = AF)) +
   geom_boxplot() + 
+  mean_dot +
   theme_bw()+
   theme_text2 +
   scale_y_bod +
@@ -178,6 +189,7 @@ burden_s %>%
   ggplot(aes(x = URBAN, y = AF)) +
   facet_grid( ~ INCOME) +
   geom_boxplot() + 
+  mean_dot +
   theme_bw()+
   theme_text2 +
   scale_y_bod +
@@ -190,6 +202,7 @@ burden_s %>%
   ggplot(aes(x = INCOME, y = AF)) +
   facet_grid( ~ URBAN) +
   geom_boxplot() + 
+  mean_dot +
   theme_bw()+
   theme_text2 +
   scale_y_bod +
@@ -201,6 +214,7 @@ burden_s %>%
  burden_s %>%
    ggplot(aes(x= reorder(STATE, AF, FUN = mean), y = AF)) +
    geom_boxplot() + 
+   mean_dot +
    theme_bw()+
    theme_text2 +
    scale_y_bod2 +
@@ -213,6 +227,7 @@ burden_s %>%
   ggplot(aes(x= INCOME, y = AF)) +
   facet_wrap( ~ STATE, nrow =  7 ) +
   geom_boxplot() + 
+  mean_dot +
   theme_bw() +
   theme_text2 +
   scale_y_bod2 +
@@ -225,6 +240,7 @@ burden_s %>%
   ggplot(aes(x= URBAN, y = AF)) +
   facet_wrap( ~ STATE, nrow =  7 ) +
   geom_boxplot() + 
+  mean_dot +
   theme_bw() +
   theme_text2 +
   scale_y_bod2 +
