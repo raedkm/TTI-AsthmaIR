@@ -12,10 +12,10 @@ ls()
 rm(list=ls())
 search()
 
-#Check working directory
+# Check working directory
 getwd()
 
-#loading libraries
+# loading libraries
 library(foreign)
 library(dplyr)
 library(xlsx)
