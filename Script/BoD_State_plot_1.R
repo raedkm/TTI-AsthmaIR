@@ -48,12 +48,12 @@ levels(burden_s$INCOME)
 
 # Assiging layers ---------------------------------------------------------
 
-theme_text <-  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust=1),
+theme_text <-  theme(axis.text.x = element_text(angle = 75, hjust = 1, vjust=1),
                      axis.title.x=element_blank(),
                      axis.title.y=element_blank(),
                      axis.ticks.x=element_blank())
 
-theme_text2 <- theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust=1),
+theme_text2 <- theme(axis.text.x = element_text(angle = 75, hjust = 1, vjust=1),
                     axis.title.x=element_blank(),
                     axis.title.y=element_blank(),
                     axis.ticks.x=element_blank())
@@ -89,7 +89,7 @@ mean_dot <- stat_summary(fun.y=mean, geom="point", shape=20, size=2, color="red"
  burden_s %>%
   ggplot(aes(x = INCOME, y = NO2)) +
   geom_boxplot() + 
-   mean_dot() + 
+   mean_dot + 
   theme_bw()+
   theme_text +
    scale_y_no2+
