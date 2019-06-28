@@ -9,7 +9,9 @@
 #---------------------------------------------#
  
 
-# Loading packages
+
+# Loading packagesa -------------------------------------------------------
+
 library(readr)
 library(dplyr)
 library(tidyr)
@@ -19,7 +21,6 @@ library(stringr)
 library(stringi)
 library(DT)
 library(htmltools)
-
 
 
 # Loading census data -----------------------------------------------------
@@ -58,7 +59,7 @@ census <- fread(file = path_census,data.table = F, stringsAsFactors = F, verbose
 included_blocks <- census$GISJOIN
 
 
-# Loading  median houshold income -------------------------------------
+# Loading median houshold income -------------------------------------
 
 path_income <- "Data\\Census\\nhgis0040_ds176_20105_2010_blck_grp.csv"
 
