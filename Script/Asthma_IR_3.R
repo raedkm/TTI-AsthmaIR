@@ -86,7 +86,7 @@ table_8 <- table_IR %>%
 
 colnames(table_8) <- names 
 
-write.xlsx(table_8, "Results/Tables/table_8.xlsx",  append = F, row.names = T)
+write.xlsx(table_8, "Results/Tables/table_A1.xlsx",  append = F, row.names = T)
 
 
 
@@ -96,4 +96,4 @@ table_9 <- Asthma_agg_IR %>%
   left_join(Asthma_agg_PRV, by = c("FIPS", "State")) %>% 
   select(State, SAMPLE, EVER, `<12_month`, At_risk, `IR per 1000`, `PRV per 100`)
 
-write.xlsx(table_9, "Results/Tables/table_9.xlsx",  append = F, row.names = F)
+write.xlsx(table_9, "Results/Tables/table_A2.xlsx",  append = F, row.names = F)

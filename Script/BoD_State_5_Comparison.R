@@ -92,5 +92,5 @@ burden_join %>%
 
 # Printing comparison tables ----------------------------------------------
 
- xlsx::write.xlsx(compare, "Results/Table_5.xlsx", row.names = F)
- xlsx::write.xlsx(compare_state, "Results/Table_6.xlsx", row.names = F) 
+ xlsx::write.xlsx(compare, "Results/Table_7.xlsx", row.names = F)
+ xlsx::write.xlsx(compare_state, "Results/Table_8.xlsx", row.names = F) 

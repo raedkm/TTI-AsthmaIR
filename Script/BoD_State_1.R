@@ -96,7 +96,7 @@ lur <- fread("Data\\Pollutant\\NO2_2010.csv", data.table = F, stringsAsFactors =
 
 # Loading state-specific asthma IR data -----------------------------------
 
-path_inc <- "Results/Tables/Asthma_IR.xlsx"
+path_inc <- "Results/Tables/Asthma_IR_update.xlsx"
 
 inc <- read_excel(path_inc, sheet = "Aggregate") %>% 
   mutate(IR = as.double(`IR per 1000`/1000)) %>% 
@@ -106,7 +106,9 @@ inc <- read_excel(path_inc, sheet = "Aggregate") %>%
 
 # Estimating weighted IR
 IR <- read_excel(path_inc, sheet = "Aggregate") %>%   
-  summarise(IR = sum(`<12_month`)/sum(At_risk))
+  summarise(IR = (sum(`<12_month`/YEARS)/sum(At_risk/YEARS)))
+
+# Assiggning weighted IR after manually dividing by the number of years states participated in.
 weighted_IR <- IR[[1]]
 
 
@@ -115,7 +117,7 @@ weighted_IR <- IR[[1]]
 
 # Loading state-specific asthma  PRV rate ---------------------------------
 
-path_prv <- "Results/Tables/Asthma_PRV.xlsx"
+path_prv <- "Results/Tables/Asthma_PRV_update.xlsx"
 
 prv <- read_excel(path_prv, sheet = "Aggregate") %>% 
   mutate(PRV = as.double(`PRV per 100`/100)) %>% 
@@ -125,7 +127,7 @@ prv <- read_excel(path_prv, sheet = "Aggregate") %>%
 
 # Estimating weighted PRV
 PRV <- read_excel(path_prv, sheet = "Aggregate") %>%   
-  summarise(PRV = sum(EVER)/sum(SAMPLE))
+  summarise(PRV = sum(EVER/YEARS)/sum(SAMPLE/YEARS))
 
 weighted_PRV <- PRV[[1]] 
 
