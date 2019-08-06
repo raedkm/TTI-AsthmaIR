@@ -34,7 +34,8 @@ census2010_var <- c("GISJOIN", "YEAR", "STATE", "STATEA", "H7V001",
                     "H7W003", "H7W004", "H7W005", "H7W006",      
                     "H76003", "H76004", "H76005", "H76006", 
                     "H76027", "H76028", "H76029", "H76030", 
-                    "PLACEA" )
+                    "PLACEA", "ZCTA5A", "SDELMA", "SDSECA", "SDUNIA", "SABINSA",
+                    "COUNTY", "COUNTYA") #For information on what the variables are, please refer to the codebook
 
 
 # Making new variable of total children count "CHILDREN" and renaming variables
@@ -53,7 +54,7 @@ census2010 <- fread(file = census2010_path,data.table = F, stringsAsFactors = F,
     TRUE ~ "Not defined" 
   )) %>% 
   rename(TOTAL = H7V001) %>% 
-  select(GISJOIN, YEAR, FIPS, PlaceFIPS, PLACEA, STATE, URBAN, TOTAL,  CHILDREN) %>% 
+  select(GISJOIN, YEAR, FIPS, STATEA, COUNTYA, PlaceFIPS, PLACEA, ZCTA5A, SDELMA, SDSECA, SDUNIA, SABINSA,  STATE, COUNTY, URBAN, TOTAL,  CHILDREN) %>% 
   as_tibble()
 
 
