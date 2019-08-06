@@ -26,19 +26,19 @@ library(htmltools)
 # Loading census data -----------------------------------------------------
 
 
-## Loading the 2010 children census 
-path_census <- "Data\\Census\\nhgis0040_ds172_2010_block.csv"
+#Year 2010 data
 
-var_census <- c("GISJOIN", "STATE", "STATEA", "URBRURALA", "H7V001", 
-         "H7W001", "H7W002", "H7W003", "H7W004", "H7W005", "H7W006",      
-         "H76003", "H76004", "H76005", "H76006", 
-         "H76027", "H76028", "H76029", "H76030", 
-         "PLACEA" )
+census2010_path <- "Data\\Census\\nhgis0043_ds172_2010_block.csv"
+
+census2010_var <- c("GISJOIN", "YEAR", "STATE", "STATEA", "H7V001", 
+                    "H7W003", "H7W004", "H7W005", "H7W006",      
+                    "H76003", "H76004", "H76005", "H76006", 
+                    "H76027", "H76028", "H76029", "H76030", 
+                    "PLACEA" )
 
 
 # Making new variable of total children count "CHILDREN" and renaming variables
-census <- fread(file = path_census,data.table = F, stringsAsFactors = F, verbose = T, select = var_census,
-                colClasses = list(factor = c("STATE", "URBRURALA"))) %>% 
+census2010 <- fread(file = census2010_path,data.table = F, stringsAsFactors = F, verbose = F, select = census2010_var) %>% 
   filter(H7V001 > 0) %>% 
   mutate(CHILDREN = H76003 + H76004 + H76005 +H76006 +
            H76027 + H76028 + H76029 + H76030) %>% 
@@ -53,43 +53,48 @@ census <- fread(file = path_census,data.table = F, stringsAsFactors = F, verbose
     TRUE ~ "Not defined" 
   )) %>% 
   rename(TOTAL = H7V001) %>% 
-  select(GISJOIN, FIPS, PlaceFIPS, PLACEA, STATE, URBRURALA, URBAN, TOTAL,  CHILDREN) %>% 
+  select(GISJOIN, YEAR, FIPS, PlaceFIPS, PLACEA, STATE, URBAN, TOTAL,  CHILDREN) %>% 
   as_tibble()
 
-included_blocks <- census$GISJOIN
+
 
 
 # Loading median houshold income -------------------------------------
 
-path_income <- "Data\\Census\\nhgis0040_ds176_20105_2010_blck_grp.csv"
+#Year 2010 data
 
-var_income <- c("GISJOIN", "JOIE001", "JOIM001" )
+income_2010_path <- "Data\\Census\\nhgis0043_ds176_20105_2010_blck_grp.csv"
 
-income <- fread(file = path_income,data.table = F, stringsAsFactors = F, verbose = T, 
-                select = var_income) %>% 
-  mutate(INCOME = as.factor(case_when(
-    JOIE001 < 20000 ~ "<20,000", 
-    between(JOIE001, 20000, 34999) ~ "20,000 to <35,000", 
-    between(JOIE001, 35000, 49999) ~ "35,000 to <50,000", 
-    between(JOIE001, 50000, 74999) ~ "50,000 to <75,000", 
-    JOIE001 >= 75000  ~ ">=75,000", 
-    TRUE ~ "Not defined"))) %>% 
-  mutate(INCOME = forcats::fct_relevel(INCOME, "<20,000", "20,000 to <35,000", "35,000 to <50,000", 
-                               "50,000 to <75,000", ">=75,000")) %>% 
-  rename(GISJOIN_i = GISJOIN) %>% 
+income_2010_var <- c("GISJOIN", "JOIE001")
+
+income_2010 <- fread(file = income_2010_path, data.table = F, stringsAsFactors = F, verbose = F,  select = income_2010_var) %>% 
+  rename(GISJOIN_i = GISJOIN,
+         M_INCOME = JOIE001) %>%
+  mutate(INCOME = case_when(
+           M_INCOME < 20000 ~ "<$20,000", 
+           between(M_INCOME, 20000, 34999) ~ "$20,000 to <$35,000", 
+           between(M_INCOME, 35000, 49999) ~ "$35,000 to <$50,000", 
+           between(M_INCOME, 50000, 74999) ~ "$50,000 to <$75,000", 
+           M_INCOME >= 75000  ~ ">=$75,000", 
+           TRUE ~ "Not defined")) %>% 
   as_tibble()  
- 
+
+
+
 
 
 # Loading NO2 data --------------------------------------------------------
 
-var_lur <- c("GISJOIN", "Y2010")
+#Year 2010 data
+NO2_2010_path <-"Data\\Pollutant\\NO2_2010.csv"
+NO2_2010_var <- c("GISJOIN", "Y2010")
 
-lur <- fread("Data\\Pollutant\\NO2_2010.csv", data.table = F, stringsAsFactors = F,  verbose = T, select = var_lur) %>% 
-  filter(GISJOIN %in% included_blocks) %>% 
+NO2_2010 <- fread(NO2_2010_path, data.table = F, stringsAsFactors = F,  verbose = F, select = NO2_2010_var) %>% 
   mutate(NO2 = Y2010*1.88) %>% 
   select(GISJOIN, NO2) %>% 
   as_tibble()
+
+
 
 
 
@@ -136,21 +141,14 @@ weighted_PRV <- PRV[[1]]
 # Joining Data Sets -------------------------------------------------------
 
 # Joining census, income, NO2, asthma incidence and asthma prevalance data sets
-join <- census %>% 
+join <- census2010 %>% 
             mutate(GISJOIN_i = substr(GISJOIN, 1, 15)) %>% 
-            left_join(lur, by = "GISJOIN") %>%
-            left_join(income, by = "GISJOIN_i") %>% 
+            left_join(NO2_2010, by = "GISJOIN") %>%
+            left_join(income_2010, by = "GISJOIN_i") %>% 
             left_join(inc, by = "FIPS") %>% 
             left_join(prv, by = "FIPS") %>% 
             replace_na(list(IR = weighted_IR, PRV = weighted_PRV)) %>% 
             select(-GISJOIN_i)
-
-
-
-# Total Incidenct Cases ---------------------------------------------------
-
-incident <- join %>%
-  mutate(CASES = (CHILDREN - (CHILDREN * PRV)) * IR)
 
 
 
@@ -161,7 +159,8 @@ incident <- join %>%
 crf <- 1.05
 unit_inc <- 4
 
-burden <- incident %>% 
+burden <- join %>% 
+  mutate(CASES = (CHILDREN - (CHILDREN * PRV)) * IR) %>% 
   mutate(RRnew = exp((log(crf)/unit_inc)*NO2)) %>% 
   mutate(AF = (RRnew - 1)/(RRnew)) %>% 
   mutate(AC = AF*CASES) 
