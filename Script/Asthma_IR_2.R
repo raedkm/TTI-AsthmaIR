@@ -167,3 +167,4 @@ Table_A2 <- Asthma_agg_IR %>%
 
 write.xlsx(Table_A2, "Results/Tables/Table_A2.xlsx",  append = F, row.names = F)
 
+

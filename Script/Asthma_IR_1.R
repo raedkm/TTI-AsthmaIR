@@ -15,8 +15,28 @@ search()
 # Check working directory
 getwd()
 
+
+
+# Java issues
+# Sys.getenv("JAVA_HOME")
+# if (Sys.getenv("JAVA_HOME")!="")+Sys.setenv(JAVA_HOME="")
+
+
+# # installing packages
+# install.packages("Deducer")
+# install.packages("rJava")
+# install.packages("foreign")
+# install.packages("dplyr")
+# install.packages("xlsx")
+# install.packages("tidyr")
+# install.packages("readxl")
+# install.packages("plyr")
+
+
+
 # loading libraries
 library(foreign)
+library(plyr)
 library(dplyr)
 library(xlsx)
 library(tidyr)
