@@ -5,6 +5,7 @@
 #Created by Raed Alotaibi
 #Date Created: March-12-2019
 #---------------------------------------------#
+
 Sys.time()
 
 # Houskeeping
@@ -16,10 +17,11 @@ search()
 getwd()
 
 
-
+# 
 # Java issues
 # Sys.getenv("JAVA_HOME")
 # if (Sys.getenv("JAVA_HOME")!="")+Sys.setenv(JAVA_HOME="")
+
 
 
 # # installing packages
