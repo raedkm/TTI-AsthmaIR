@@ -47,7 +47,7 @@ library(readxl)
 
 # Loading data set
 
-load("Data/FIPS.R")
+load("Input/FIPS.R")
 FIPS$FIPS <- as.double(FIPS$FIPS) #To be used to add FIPS code and state names to data sets
 
 
@@ -60,8 +60,8 @@ for(i in 6:10){
   
   
   # Assigning the ACBS and BRFSS file paths
-  path_ACBS <- paste0("Data/ACBS_20", year, ".SAV")
-  path_BRFSS <- paste0("Data/CDBRFS", year, ".XPT")
+  path_ACBS <- paste0("Input/ACBS_20", year, ".SAV")
+  path_BRFSS <- paste0("Input/CDBRFS", year, ".XPT")
   
   
   # Reading the ACBS and BRFSS files
@@ -164,10 +164,10 @@ for(i in 6:10){
   
   # Printing to Excel sheet
   
-  write.xlsx(Asthma_sample, "Results/Tables/Asthma_result.xlsx", sheetName = paste0("20", year, "_count"), showNA=F, append = T, row.names = F)
-  write.xlsx(Asthma_weighted, "Results/Tables/Asthma_result.xlsx", sheetName = paste0("20", year, "_weighted"), showNA=F, append = T,row.names = F)
-  write.xlsx(Asthma_IR, "Results/Tables/Asthma_IR.xlsx", sheetName = paste0("20", year), showNA=F, append = T, row.names = F)
-  write.xlsx(Asthma_PRV, "Results/Tables/Asthma_PRV.xlsx", sheetName = paste0("20", year), showNA=F, append = T, row.names = F)
+  write.xlsx(Asthma_sample, "Output/Tables/Asthma_result.xlsx", sheetName = paste0("20", year, "_count"), showNA=F, append = T, row.names = F)
+  write.xlsx(Asthma_weighted, "Output/Tables/Asthma_result.xlsx", sheetName = paste0("20", year, "_weighted"), showNA=F, append = T,row.names = F)
+  write.xlsx(Asthma_IR, "Output/Tables/Asthma_IR.xlsx", sheetName = paste0("20", year), showNA=F, append = T, row.names = F)
+  write.xlsx(Asthma_PRV, "Output/Tables/Asthma_PRV.xlsx", sheetName = paste0("20", year), showNA=F, append = T, row.names = F)
   
   
   

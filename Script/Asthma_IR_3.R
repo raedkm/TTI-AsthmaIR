@@ -9,7 +9,7 @@
 
 
 # loading States and FIPs code
-load("Data/FIPS.R")
+load("Input/FIPS.R")
 FIPS$FIPS <- as.double(FIPS$FIPS) #To be used to add FIPS code and state names to data sets
 
 
@@ -21,12 +21,12 @@ Asthma_var <- c('State', 'IR_per1000')
 
 
 # Loading the Asthma incidence rate tables produced from earlier scripts
-Asthma_06 <- read_excel("Results/Tables/Asthma_IR.xlsx", sheet = "2006") %>% select(Asthma_var)
-Asthma_07 <- read_excel("Results/Tables/Asthma_IR.xlsx", sheet = "2007") %>% select(Asthma_var)
-Asthma_08 <- read_excel("Results/Tables/Asthma_IR.xlsx", sheet = "2008") %>% select(Asthma_var)
-Asthma_09 <- read_excel("Results/Tables/Asthma_IR.xlsx", sheet = "2009") %>% select(Asthma_var)
-Asthma_10 <- read_excel("Results/Tables/Asthma_IR.xlsx", sheet = "2010") %>% select(Asthma_var)
-Asthma_agg <- read_excel("Results/Tables/Asthma_IR.xlsx", sheet = "Aggregate") %>% select('State', `IR per 1000`)
+Asthma_06 <- read_excel("Output/Tables/Asthma_IR.xlsx", sheet = "2006") %>% select(Asthma_var)
+Asthma_07 <- read_excel("Output/Tables/Asthma_IR.xlsx", sheet = "2007") %>% select(Asthma_var)
+Asthma_08 <- read_excel("Output/Tables/Asthma_IR.xlsx", sheet = "2008") %>% select(Asthma_var)
+Asthma_09 <- read_excel("Output/Tables/Asthma_IR.xlsx", sheet = "2009") %>% select(Asthma_var)
+Asthma_10 <- read_excel("Output/Tables/Asthma_IR.xlsx", sheet = "2010") %>% select(Asthma_var)
+Asthma_agg <- read_excel("Output/Tables/Asthma_IR.xlsx", sheet = "Aggregate") %>% select('State', `IR per 1000`)
 
 
 
@@ -58,12 +58,12 @@ Asthma_var <- c('State', 'PRV_per100')
 
 
 # Loading the Asthma incidence rate tables produced from earlier scripts
-Asthma_06 <- read_excel("Results/Tables/Asthma_PRV.xlsx", sheet = "2006") %>% select(Asthma_var)
-Asthma_07 <- read_excel("Results/Tables/Asthma_PRV.xlsx", sheet = "2007") %>% select(Asthma_var)
-Asthma_08 <- read_excel("Results/Tables/Asthma_PRV.xlsx", sheet = "2008") %>% select(Asthma_var)
-Asthma_09 <- read_excel("Results/Tables/Asthma_PRV.xlsx", sheet = "2009") %>% select(Asthma_var)
-Asthma_10 <- read_excel("Results/Tables/Asthma_PRV.xlsx", sheet = "2010") %>% select(Asthma_var)
-Asthma_agg <- read_excel("Results/Tables/Asthma_PRV.xlsx", sheet = "Aggregate") %>% select('State', `PRV per 100`)
+Asthma_06 <- read_excel("Output/Tables/Asthma_PRV.xlsx", sheet = "2006") %>% select(Asthma_var)
+Asthma_07 <- read_excel("Output/Tables/Asthma_PRV.xlsx", sheet = "2007") %>% select(Asthma_var)
+Asthma_08 <- read_excel("Output/Tables/Asthma_PRV.xlsx", sheet = "2008") %>% select(Asthma_var)
+Asthma_09 <- read_excel("Output/Tables/Asthma_PRV.xlsx", sheet = "2009") %>% select(Asthma_var)
+Asthma_10 <- read_excel("Output/Tables/Asthma_PRV.xlsx", sheet = "2010") %>% select(Asthma_var)
+Asthma_agg <- read_excel("Output/Tables/Asthma_PRV.xlsx", sheet = "Aggregate") %>% select('State', `PRV per 100`)
 
 
 # Table with IR by state and year -----------------------------------------
@@ -88,8 +88,8 @@ Asthma_PR_year
 
 
 # Priting the table to excel
-write.xlsx(Asthma_IR_year, "Results/Tables/Asthma_IR_years.xlsx",  showNA=F, append = F, row.names = F)
-write.xlsx(Asthma_PR_year, "Results/Tables/Asthma_PR_years.xlsx",  showNA=F, append = F, row.names = F)
+write.xlsx(Asthma_IR_year, "Output/Tables/Asthma_IR_years.xlsx",  showNA=F, append = F, row.names = F)
+write.xlsx(Asthma_PR_year, "Output/Tables/Asthma_PR_years.xlsx",  showNA=F, append = F, row.names = F)
 
 
 
